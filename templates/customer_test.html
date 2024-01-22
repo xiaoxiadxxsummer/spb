@@ -1,0 +1,89 @@
+{% extends "personal_home.html" %}
+{% block content %}
+  <div class="container" >
+    <input type="text" id="ctx" hidden="hidden">
+    <div class="search">
+        <div class="input-group col-md-8">
+            <button class="btn btn-primary" type="button" id="add" data-bs-toggle="modal" data-bs-target="#addCustomerModal">
+                Add Customer
+            </button>
+            <input class="form-control" type="text" id="customer_search" placeholder="please input relevant infomartion,end up with enter">
+            <span class="input-group-btn">
+					<button class="btn btn-success" type="button" id="customer_search_btn">
+																search
+					</button>
+			</span>
+        </div>
+    </div>
+
+    <div class="row" style="height: 100%;width: 100%;overflow: scroll">
+        <div class="col-md-12">
+            <div class="portlet">
+                <div class="category-list">
+                    <table class="table table-striped table-hover" id="dataTable" >
+                        <thead>
+                        <tr>
+                            <th>firstname</th>
+                            <th>familyname</th>
+                            <th>email</th>
+                            <th>phone</th>
+                        </tr>
+                        </thead>
+                        <tbody id="customer_list_tbody">
+                            {% for customer in customer_list %}
+                                <tr>
+                                    <td>{{customer[1]}}</td>
+                                    <td>{{customer[2]}}</td>
+                                    <td>{{customer[3]}}</td>
+                                    <td>{{customer[4]}}</td>
+                                </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!--编辑框-->
+  <div class="modal" id="addCustomerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Customer</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="m_id" hidden="hidden">
+                <div class="form-group">
+                    <label class="control-label">FirstName：</label>
+                    <input type="text" class="form-control" id="m_firstname" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">FamilyName：</label>
+                    <input type="text" class="form-control" id="m_familyname" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" >Email：</label>
+                    <input type="text" class="form-control" id="m_email" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Phone：</label>
+                    <input type="text" class="form-control" id="m_phone" placeholder="">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal">close</button>
+                <button type="button" class="btn btn-primary" id="add_customer_btn">submit</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+  </div>
+
+{% endblock %}

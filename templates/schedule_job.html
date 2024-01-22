@@ -1,0 +1,58 @@
+{% extends "personal_home.html" %}
+{% block content %}
+  <div class="container">
+    <form style="flex: 0 1 auto;border: #0a53be 2px solid;padding: 10px;">
+      <h2>JOB Schedule:</h2>
+      <div style="margin-top:30px">
+        <select class="form-select col-5" id="user_name_select" aria-label="Default select example">
+        <option selected value="0">Open this select menu</option>
+          {% for user in user_list %}
+            <option value="{{user[0]}}">{{user[1]}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <input type="date" id="job_date_picker" class="form-control" style="margin-top:30px">
+      <div style="display: flex;justify-content: center;margin-top:20px">
+        <button class="btn btn-success" id="submit_schedule_job" style="width:200px">submit</button>
+      </div>
+    </form>
+    <div class="add-form">
+        <hr/>
+        <div>
+            <h2>JOB LIST:</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet">
+                    <div class="category-list">
+                        <table class="table table-striped table-hover" id="dataTable" >
+                            <thead>
+                            <tr>
+                                <th>JOB_DATE</th>
+                                <th>CUSTOMER</th>
+                                <th>TOTAL_COST</th>
+                                <th>COMPLETED</th>
+                                <th>PAID</th>
+                            </tr>
+                            </thead>
+                            <tbody id="unpaid_bill_list_tbody">
+                                {% for bill in bill_list %}
+                                    <tr>
+                                        <td>{{bill[1]}}</td>
+                                        <td>{{bill[6]}}</td>
+                                        <td>{{bill[3]}}</td>
+                                        <td>{{bill[4]}}</td>
+                                        <td>{{bill[5]}}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </div>
+
+{% endblock %}

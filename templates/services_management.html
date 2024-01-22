@@ -1,0 +1,51 @@
+{% extends "personal_home.html" %}
+{% block content %}
+  <div class="container" style="display: flex;flex-direction: column;height: 100vh;overflow: hidden;">
+    <form style="flex: 0 1 auto;border: #0a53be 2px solid;padding: 10px;">
+      <h2>Add service:</h2>
+      <div class="mb-3">
+        <label for="add_service_name" class="form-label">Service Name:</label>
+        <input type="text" class="form-control" id="add_service_name" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="add_service_cost" class="form-label">Cost:</label>
+        <input type="text" class="form-control" id="add_service_cost">
+      </div>
+        <div  class="row row-cols-6" style="display: flex;justify-content: center;align-items: center">
+            <button type="button" class="btn btn-danger" id="add_service_reset">Reset</button>
+            <div></div>
+            <button type="submit" class="btn btn-primary" id="add_service_submit">Submit</button>
+        </div>
+    </form>
+    <div class="add-form" style="flex: 1;overflow: auto;">
+        <hr/>
+        <h2>Service List:</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet">
+                    <div class="category-list">
+                        <table class="table table-striped table-hover" id="dataTable" >
+                            <thead>
+                            <tr>
+                                <th>SERVICE NAME</th>
+                                <th>COST</th>
+                            </tr>
+                            </thead>
+                            <tbody id="service_list_tbody">
+                                {% for service in service_list %}
+                                    <tr>
+                                        <td>{{service[1]}}</td>
+                                        <td>{{service[2]}}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </div>
+
+{% endblock %}
