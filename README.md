@@ -20,7 +20,7 @@ Before designing this system, I studied the design ideas of many similar project
 
 ## Database questions
 ### 1.  What SQL statement creates the job table and defines its fields/columns?  
-spb_pa.sql文件creates了6个表，他们分别为customer、job、part、job_part、job_service。创建table和其fields/columns的语句如下：
+The spb_pa.sql file creates 6 tables, which are customer, job, part, job_part, and job_service. The statements for creating tables and their fields/columns are as follows:
 
 ```
 CREATE TABLE IF NOT EXISTS customer
@@ -85,7 +85,8 @@ FOREIGN KEY (service_id) REFERENCES service(service_id)
 ON UPDATE CASCADE
 );
 ```
-现我来分析最后一个表job_service，这个表包含了job_id, service_id, qty三个列(columns)，它们都是整型(INT)，他们三个都不能为空，qty默认值为1。表job_service有外键job_id，它是job表的主键；有service_id，是service表的主键。service表的service_id更新时，job表中的service_id也更新。
+Now, let's analyze the last table, job_service. This table contains three columns: job_id, service_id, and qty, all of which are integers (INT). All three columns cannot be null, with qty having a default value of 1. The job_service table has a foreign key, job_id, which is the primary key of the job table; and service_id, which is the primary key of the service table. When the service_id in the service table is updated, the service_id in the job table is also updated.
+
 ```
 CREATE TABLE IF NOT EXISTS job_service
 (
@@ -100,13 +101,13 @@ FOREIGN KEY (service_id) REFERENCES service(service_id)
 ON UPDATE CASCADE
 );
 ```
-其余表中具体包含的列名的分析方法同上，在此不再赘述。
+The method of analyzing the column names included in the other tables is the same as above and will not be repeated here.
 ### 2. Which line of SQL code sets up the relationship between the customer and job tables?
 ```
 FOREIGN KEY (customer) REFERENCES customer(customer_id)
 ON  UPDATE CASCADE
 ```
-job表中的customer键是外键，它是customer表的主键customer_id，当customer表中customer_id的值改变时，job表中的customer同时改变。这就sets up the relationship between the customer and job tables。
+In the job table, the customer key is a foreign key, which is the primary key customer_id in the customer table. When the value of customer_id in the customer table changes, the customer in the job table changes simultaneously. This sets up the relationship between the customer and job tables.
 
 ### 3. Which lines of SQL code insert details into the parts table?
 ```
@@ -119,9 +120,9 @@ INSERT INTO part (`part_name`, `cost`) VALUES ('Tail light', '120.54');
 INSERT INTO part (`part_name`, `cost`) VALUES ('Hub Cap', '22.89');
 ```
 ### 4. Suppose that as part of an audit trail, the time and date a service or part was added to a job needed to be recorded, what fields/columns would you need to add to which tables? Provide the table name, new column name and the data type. 
-`job_service`表： 
- 列名：`added_date`
- 数据类型：`DATETIME`  或  `TIMESTAMP`
+`job_service`table: 
+ Column name:`added_date`
+ Data type: `DATETIME`  或  `TIMESTAMP`
     
  `job_part`表：   
  列名：`added_date`
