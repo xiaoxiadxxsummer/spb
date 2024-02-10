@@ -1,7 +1,6 @@
 ## Web application structure
 
-在实际应用中，前端的请求将以调用接口的形式发送给后端，而后端将首先检查该请求的路由路径是否存在，若存在则调用的该路径所对应的业务函数，执行对应的业务逻辑处理并将结果返回到前端。系统中核心的接口如下表所示。
-
+In practical applications, the frontend's requests are sent to the backend in the form of API calls. The backend first checks if the route path of the request exists. If it does, the corresponding business function for that path is invoked to execute the relevant business logic and return the results to the frontend. The core interfaces in the system are shown in the following table.
 
 ~~这里贴一个表格的截图~~
 
@@ -9,11 +8,15 @@
 
 ## Design decisions
 
-在设计这个系统之前，我学习了许多类似项目的设计思路。经过充分的调研，我拥有了自己的设计决定。我的系统设计不仅能够满足技术人员与管理员分别对待这一基本要求，并且可以很好的满足管理员界面的一系列功能。
-在 **路由** 方面，本系统不仅并为不同角色的用户（技术人员和管理员）创建不同的路由路径，并且将不同的功能和页面映射到不同的路由路径上，便于问题排查和后期维护。
-在 **模版** 方面，本系统使用HTML模版，创建了足够多且不冗余的模板文件，如customer_test.html, parts_management.html, services_management.html, unpaid_bill_management.html等，以便根据不同的路由路径和数据呈现不同的页面。至于post和get方式的使用，在本系统中，不同的function使用不同的方式，甚至有些函数可以使用其中任意一种方式。例如searchCustomer指定使用get，scheduleJob使用post方式。GET请求更适用于查询操作，而由于POST请求的数据不会直接暴露在URL中，相对更安全，因此POST请求适用于发送数据操作。
-在 **数据** 方面，本系统合理规划了数据库架构，以适应网站所需的数据实体和关系，例如客户、工作、服务、零件和账单等，并使用MySQL来存储和管理数据。同时，为保障数据的一致性和完整性，本系统具有数据输入验证、使用事务管理保障相关操作的原子性、验证和约束等机制。
-在 **整体布局** 方面，本系统设计了侧方导航栏，使用户能够在不同的页面之间轻松导航；使用响应式设计，以确保网站在不同设备上的显示效果良好。
+Before designing this system, I studied the design ideas of many similar projects. After thorough research, I developed my own design decisions. My system design not only meets the basic requirement of treating technical staff and administrators separately but also satisfactorily supports a series of functions in the administrator interface.
+
+**Routing:** The system creates different route paths for users of different roles (technical staff and administrators) and maps different functions and pages to different route paths, facilitating troubleshooting and future maintenance.
+
+**Templates:** The system uses HTML templates to create a sufficient number of non-redundant template files, such as customer_test.html, parts_management.html, services_management.html, unpaid_bill_management.html, etc., to display different pages according to different route paths and data. Regarding the use of POST and GET methods, different functions in this system use different methods, and some functions can use either method. For example, searchCustomer is designated to use GET, while scheduleJob uses POST. GET requests are more suitable for query operations, and since the data in POST requests is not directly exposed in the URL, they are relatively more secure and thus suitable for data submission operations.
+
+**Data:** The system has a well-planned database architecture to accommodate the data entities and relationships needed for the website, such as customers, jobs, services, parts, and bills, using MySQL for data storage and management. To ensure data consistency and integrity, the system employs mechanisms for data input validation, transaction management to ensure the atomicity of related operations, and validation and constraints.
+
+**Overall Layout:** The system features a sidebar navigation, enabling users to easily navigate between different pages; it uses responsive design to ensure the website displays well on various devices.
 
 ## Database questions
 ### 1.  What SQL statement creates the job table and defines its fields/columns?  
