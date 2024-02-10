@@ -120,16 +120,16 @@ INSERT INTO part (`part_name`, `cost`) VALUES ('Tail light', '120.54');
 INSERT INTO part (`part_name`, `cost`) VALUES ('Hub Cap', '22.89');
 ```
 ### 4. Suppose that as part of an audit trail, the time and date a service or part was added to a job needed to be recorded, what fields/columns would you need to add to which tables? Provide the table name, new column name and the data type. 
-`job_service`table: 
- Column name:`added_date`
- Data type: `DATETIME`  或  `TIMESTAMP`
+`job_service`table:  
+ Column name:  `added_date`
+ Data type: `DATETIME`  or  `TIMESTAMP`
     
- `job_part`表：   
- 列名：`added_date`
-数据类型：`DATETIME`  或  `TIMESTAMP`
+ `job_part`table:    
+Column name: `added_date`
+ Data type: `DATETIME`  or  `TIMESTAMP`
 
 ### 5. Suppose logins were implemented. Why is it important for technicians and the office administrator to access different routes? As part of your answer, give two specific examples of problems that could occur if all of the web app facilities were available to everyone.
 The tasks of technicians are is updating customer jobs with parts and services. But The tasks of admin staff are updating, editing and adding data. Due to different tasks, it is important for technicians and the office administrator to access different routes. 
-数据泄露，如果谁都能访问数据库，那可能造成用户个人信息泄露、重要信息被篡改、。。。
-功能滥用。除了数据的保密性会收到威胁，如果不进行接口的区分，每个员工都会面对着繁杂的系统，他们不得不从一堆功能中选出自己用得上的功能，并且可能会误触一些本不是他职责内的功能。这使得每个员工需要面对许多冗余的功能，降低工作效率。
+Data breaches, if everyone can access the database, could lead to the leakage of personal user information, important information being tampered with, and more.
+Function misuse. Besides the threat to data confidentiality, if no distinction is made in the interface, every employee will face a complex system. They will have to choose the functions they need from a plethora of options and may inadvertently trigger some functions that are not part of their responsibilities. This exposes each employee to many redundant functions, reducing work efficiency.
 
