@@ -2,7 +2,8 @@
 
 In practical applications, the frontend's requests are sent to the backend in the form of API calls. The backend first checks if the route path of the request exists. If it does, the corresponding business function for that path is invoked to execute the relevant business logic and return the results to the frontend. The core interfaces in the system are shown in the following table.
 
-~~这里贴一个表格的截图~~
+![Weixin Screenshot_20240210183516](https://github.com/xiaoxiadxxsummer/spb/assets/109004935/e054df78-c8a2-4996-83f0-743a27146570)
+
 
 
 
