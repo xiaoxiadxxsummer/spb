@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f8b6c913-d665-419b-bc91-8ff61b2c9189" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/jobDone.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/jobsDone.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/jobDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/jobDetail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/overdue_bill_management.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/overdue_bill_management.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/personal_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/personal_home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/schedule_job.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/schedule_job.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/unpaid_bill_management.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/unpaid_bill_management.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2ZtI4qn4Sy09Dv299ps8cts8CkB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/DreamComeTrue/xiaoxia-homework/spb",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\DreamComeTrue\xiaoxia-homework\flask_learning\static\sideBar" />
+      <recent name="C:\DreamComeTrue\xiaoxia-homework\flask_learning\static\common" />
+      <recent name="C:\DreamComeTrue\xiaoxia-homework\flask_learning\static" />
+      <recent name="C:\DreamComeTrue\xiaoxia-homework\flask_learning" />
+      <recent name="C:\DreamComeTrue\xiaoxia-homework\flask_learning\html" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\DreamComeTrue\xiaoxia-homework\spb\templates" />
+      <recent name="C:\DreamComeTrue\xiaoxia-homework\flask_learning\static\img" />
+      <recent name="C:\DreamComeTrue\xiaoxia-homework\flask_learning" />
+      <recent name="C:\DreamComeTrue\xiaoxia-homework\flask_learning\templates" />
+      <recent name="C:\DreamComeTrue\xiaoxia-homework\flask_learning\static\common" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="tooltip" />
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="spb_admin_summer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="spb" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../636-1215" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../636-1215/spb_admin_summer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.spb_admin_summer" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f8b6c913-d665-419b-bc91-8ff61b2c9189" name="Changes" comment="" />
+      <created>1703234760868</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1703234760868</updated>
+      <workItem from="1703234761921" duration="6564000" />
+      <workItem from="1703401334229" duration="81983000" />
+      <workItem from="1704163171922" duration="973000" />
+      <workItem from="1704280146777" duration="6174000" />
+      <workItem from="1704963808948" duration="1462000" />
+      <workItem from="1705885426258" duration="1908000" />
+      <workItem from="1705896800092" duration="494000" />
+      <workItem from="1707402766879" duration="8000" />
+      <workItem from="1707402832184" duration="476000" />
+      <workItem from="1707403336624" duration="2332000" />
+      <workItem from="1707405734926" duration="75000" />
+      <workItem from="1707405873718" duration="73558000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/templates/personal_home.html</url>
+          <line>299</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/flask_learning$spb_admin_summer.coverage" NAME="spb_admin_summer Coverage Results" MODIFIED="1703331777980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../636-1215" />
+  </component>
+</project>
