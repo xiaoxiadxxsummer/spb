@@ -1,7 +1,7 @@
 {% extends "personal_home.html" %}
 {% block content %}
 <div style="width: 100%" class="d-flex flex-column align-items-center pt-4">
-    <h2>Curent Job List</h2>
+    <h2>Done Job List</h2>
 
     <!-- code to display list of jobs-->
     <table>
@@ -13,7 +13,7 @@
         {% for job in job_list %}
             <tr>
                 {% for field in job %}
-                    <td><a href="/technician/jobDetail?job_id={{job[0]}}&&job_total_cost={{job[4] if job[4] else 0.0}}">{{field}}</a></td>
+                    <td><a href="/technician/haveDoneJob?job_id={{job[0]}}&&job_total_cost={{job[4] if job[4] else 0.0}}">{{field}}</a></td>
                 {% endfor %}
             </tr>
         {% endfor %}

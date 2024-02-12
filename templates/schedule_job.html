@@ -1,6 +1,6 @@
 {% extends "personal_home.html" %}
 {% block content %}
-  <div class="container">
+  <div class="container" style="overflow: scroll">
     <form style="flex: 0 1 auto;border: #0a53be 2px solid;padding: 10px;">
       <h2>JOB Schedule:</h2>
       <div style="margin-top:30px">
@@ -38,11 +38,15 @@
                             <tbody id="unpaid_bill_list_tbody">
                                 {% for bill in bill_list %}
                                     <tr>
-                                        <td>{{bill[1]}}</td>
-                                        <td>{{bill[6]}}</td>
-                                        <td>{{bill[3]}}</td>
-                                        <td>{{bill[4]}}</td>
-                                        <td>{{bill[5]}}</td>
+                                        <td>{{ bill[1] }}</td>
+                                        <td>{{ bill[7] }}</td>
+                                        <td>{% if bill[3] is not none %}
+                                            {{ bill[3] }}
+                                        {% else %}
+                                            0.0
+                                        {% endif %}</td>
+                                        <td>{{ bill[4] }}</td>
+                                        <td>{{ bill[5] }}</td>
                                     </tr>
                                 {% endfor %}
                             </tbody>

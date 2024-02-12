@@ -1,0 +1,106 @@
+{% extends "personal_home.html" %}
+{% block content %}
+<form action="/technician/jobDetailSubmit?job_id={{job_id}}&job_total_cost={{job_total_cost }}" method="post" style="width:100%;border: #0a53be 2px solid;padding: 10px;overflow: scroll">
+
+      <div class="row">
+          <div class="col">
+              <h2>JOB Detail:</h2>
+          </div>
+      </div>
+         <div id="job_id_hidden" style="display:none ">{{job_id}}</div>
+         <div class="job_part_container p-2" style="border: solid 1px">
+          <h3>Part:</h3>
+          <h4>Selected Parts:</h4>          <h4>Total Cost:{{job_total_cost if job_total_cost else 0.0}}</h4>
+          {% for jobPart in jobPartList %}
+              <div class="row">
+                <div class="col-sm">
+                     PartName:{{jobPart[4]}}
+                </div>
+                <div class="col-sm">
+                    PartNumbers:{{jobPart[2]}}
+                </div>
+              </div>
+          {% endfor %}
+              <hr/>
+              <h5>Please select part name and input the number of parts you need</h5>
+              <div id="job_part_item_area" >
+                  <div class="row mt-2 job_part_item_row" >
+                    <div  class="col-5">
+                        <select class="form-select col-5" name="partSelect[0]">
+                            <option selected value="0">Open this select part</option>
+                         {% for part in partList %}
+                            <option value="{{part[0]}}">{{part[1]}}</option>
+                         {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-5">
+                        <input class="form-control" type="text" name="partInput[0]"/>
+                    </div>
+                    <div class="col-1 text-center align-center add_part_item" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="80%"  fill="currentColor" class="bi bi-file-plus" viewBox="0 0 16 16">
+                          <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z"/>
+                          <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
+                        </svg>
+                    </div>
+                    <div class="col-1 text-center align-items-center delete_part_item" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="80%" fill="currentColor" class="bi bi-file-minus" viewBox="0 0 16 16">
+                          <path d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
+                          <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                        </svg>
+                    </div>
+                  </div>
+              </div>
+        </div>
+         <div class="job_service_container p-2" style="border: solid 1px">
+          <h3>Service:</h3>
+          <h4>Selected Services:</h4>
+          {% for jobService in jobServiceList %}
+              <div class="row">
+                <div class="col-sm">
+                     ServiceName:{{jobService[4]}}
+                </div>
+                <div class="col-sm">
+                    ServiceNumbers:{{jobService[2]}}
+                </div>
+              </div>
+          {% endfor %}
+              <hr/>
+              <h5>Please select service name and input the number of services you need</h5>
+              <div id="job_service_item_area" >
+                  <div class="row mt-2 job_service_item_row" >
+                    <div  class="col-5">
+                        <select class="form-select col-5" name="serviceSelect[0]">
+                            <option selected value="0">Open this select service</option>
+                         {% for service in serviceList %}
+                            <option value="{{service[0]}}">{{service[1]}}</option>
+                         {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-5">
+                        <input class="form-control" type="text" name="serviceInput[0]"/>
+                    </div>
+                    <div class="col-1 text-center align-center add_service_item" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="80%"  fill="currentColor" class="bi bi-file-plus" viewBox="0 0 16 16">
+                          <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z"/>
+                          <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
+                        </svg>
+                    </div>
+                    <div class="col-1 text-center align-items-center delete_service_item" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="80%" fill="currentColor" class="bi bi-file-minus" viewBox="0 0 16 16">
+                          <path d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
+                          <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                        </svg>
+                    </div>
+                  </div>
+              </div>
+        </div>
+        <div style="display: flex;justify-content: center;margin-top:20px">
+            <button  class="btn btn-success" type="submit" id="submit_create_job" style="width:200px">submit</button>
+            {% if job and job[4] == 0 %}
+                <button class="btn btn-primary" type="button" id="mark_job_done" style="width: 200px">Mark as done</button>
+            {% elif job and job[4] == 1 %}
+                <button class="btn btn-danger" type="button" id="mark_done" style="width: 200px">Job done</button>
+            {% endif %}
+        </div>
+</form>
+{% endblock %}

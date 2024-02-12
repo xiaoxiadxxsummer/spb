@@ -1,0 +1,63 @@
+{% extends "personal_home.html" %}
+{% block content %}
+
+<div class="container" style="overflow: scroll">
+    <div class="add-form">
+        <hr/>
+        <div class="header row">
+            <div class="col-4">
+                Overdue BILL LIST:
+            </div>
+        </div>
+        {% for customer_id, bills in customer_bills.items() %}
+            <div class="card" style="width: 100%;">
+              <div class="card-body">
+                <h5 class="card-title">Customer ID: {{ customer_id }} </h5>
+                 <table class="table table-hover" id="dataTable" >
+                            <thead>
+                            <tr>
+                                <th>JOB_DATE</th>
+                                <th>CUSTOMER</th>
+                                <th>CUSTOMER NAME</th>
+                                <th>EMAIL</th>
+                                <th>PHONE</th>
+                                <th>TOTAL_COST</th>
+                                <th>COMPLETED</th>
+                            </tr>
+                            </thead>
+                            <tbody id="unpaid_bill_list_tbody">
+                                {% for overdue_bill in bills %}
+                                    <tr>
+                                        <td>{{overdue_bill[1]}}</td>
+                                        <td>{{overdue_bill[7]}}</td>
+                                        <td>{{overdue_bill[6] if overdue_bill[6] is defined and overdue_bill[6] != none else ''}}</td>
+                                        <td>{{overdue_bill[8]}}</td>
+                                        <td>{{overdue_bill[9]}}</td>
+                                        <td>{{overdue_bill[3] if overdue_bill[3] is defined and overdue_bill[3] != none else 0.0 }}</td>
+                                        <td>{{overdue_bill[5]}}</td>
+                                    </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+              </div>
+            </div>
+        {% endfor %}
+    </div>
+
+  </div>
+    <style>
+    #dataTable {
+        --bs-table-bg: #e51010;
+        background-color: var(--bs-table-bg);
+    }
+    #dataTable tbody tr {
+        background-color: inherit;
+    }
+    #dataTable.custom-table tbody tr td {
+    color: white;
+    }
+    </style>
+
+
+{% endblock %}

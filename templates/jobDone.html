@@ -1,0 +1,47 @@
+{% extends "personal_home.html" %}
+{% block content %}
+<form style="width:100%;border: #0a53be 2px solid;padding: 10px;overflow: scroll">
+      <div class="row">
+          <div class="col">
+              <h2>JOB Detail:</h2>
+          </div>
+      </div>
+         <div id="job_id_hidden" style="display:none ">{{job_id}}</div>
+         <div class="job_part_container p-2" style="border: solid 1px">
+          <h3>Part:</h3>
+          <h4>Selected Parts:</h4>          <h4>Total Cost:{{job_total_cost if job_total_cost else 0.0}}</h4>
+          {% for jobPart in jobPartList %}
+              <div class="row">
+                <div class="col-sm">
+                     PartName:{{jobPart[4]}}
+                </div>
+                <div class="col-sm">
+                    PartNumbers:{{jobPart[2]}}
+                </div>
+              </div>
+          {% endfor %}
+              <hr/>
+        </div>
+         <div class="job_service_container p-2" style="border: solid 1px">
+          <h3>Service:</h3>
+          <h4>Selected Services:</h4>
+          {% for jobService in jobServiceList %}
+              <div class="row">
+                <div class="col-sm">
+                     ServiceName:{{jobService[4]}}
+                </div>
+                <div class="col-sm">
+                    ServiceNumbers:{{jobService[2]}}
+                </div>
+              </div>
+          {% endfor %}
+        </div>
+        <div style="display: flex;justify-content: center;margin-top:20px">
+            {% if job and job[4] == 0 %}
+                <button class="btn btn-primary" type="button" id="mark_job_done" style="width: 200px">Mark as done</button>
+            {% elif job and job[4] == 1 %}
+                <button class="btn btn-danger" type="button" id="mark_done" style="width: 200px">Job done</button>
+            {% endif %}
+        </div>
+</form>
+{% endblock %}

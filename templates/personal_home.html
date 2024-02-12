@@ -12,7 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>-->
 
-<link href="/static/common/bootstrap.min.css" rel="stylesheet">
+<!--<link href="/static/common/bootstrap.min.css" rel="stylesheet">-->
 
     <style>
         /*sidebar style*/
@@ -179,22 +179,39 @@
 
 <main class="d-flex flex-nowrap">
   <h1 class="visually-hidden">Selwyn Panel Beaters</h1>
-
   <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 350px;">
     <a href="{{url_for('welcome_home')}}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
       <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
       <span class="fs-4">Selwyn Panel Beaters</span>
     </a>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
+     <hr>
+     <span class="fs-4">Technician Interface</span>
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a href="/technician/currentjobs" class="nav-link text-white">
+              <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+              Current Job
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/technician/haveDoneJobs" class="nav-link text-white">
+              <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+              Done Job
+            </a>
+          </li>
+        </ul>
+     <hr>
+     <span class="fs-4">Manager Interface</span>
+
+     <ul class="nav nav-pills flex-column mb-auto">
       <li>
-        <a href="{{url_for('customerTest')}}" class="nav-link text-white">
+        <a href="{{url_for('customerManagement')}}" class="nav-link text-white">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
           Customers Management
         </a>
       </li>
       <li class="nav-item">
-        <a href="/bill/getScheduleJobPage" class="nav-link text-white" aria-current="page">
+        <a href="{{url_for('getScheduleJobPage')}}" class="nav-link text-white" aria-current="page">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           Schedule Job
         </a>
@@ -214,13 +231,13 @@
       <li>
         <a href="{{url_for('unpaidBillManagement')}}" class="nav-link text-white">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-          overdue bill management
+          unpaid management
         </a>
       </li>
       <li>
-        <a href="{{url_for('unpaidBillManagement')}}" class="nav-link text-white">
+        <a href="{{url_for('getOverdueBill')}}" class="nav-link text-white">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-          unpaid management
+          overdue bill management
         </a>
       </li>
 
@@ -234,6 +251,7 @@
     <script TYPE="text/javascript">
 
       window.onload =function (){
+        // In the frontend, determine whether corresponding widget events need to be mounted based on the routing path.
         var path = window.location.pathname;
         if (path.includes('/customer')){
           document.getElementById("add_customer_btn").addEventListener('click',addCustomerSubmit)
@@ -246,11 +264,11 @@
           document.getElementById('add_service_reset').addEventListener('click', addServiceReset)
         }else if (path.includes('/unpaidBill')){
           document.getElementById('search_unpaid_bill_by_name').addEventListener('click', searchUnpaidBillByName)
-          // document.getElementById('pay_bill_btn').addEventListener('click', payBill)
           document.getElementById('unpaid_bill_list_tbody').addEventListener('click', function(event) {
             if (event.target && event.target.classList.contains('pay_bill_btn')) {
               let customerId = event.target.getAttribute('data-id');
-
+              let jobDate = event.target.getAttribute('data-jobDate');
+              payBill(customerId,jobDate)
             }
           });
         }else if (path.includes('/bill')){
@@ -259,7 +277,42 @@
           const today = new Date().toISOString().split('T')[0];
           datePicker.setAttribute('min', today);
           document.getElementById('submit_schedule_job').addEventListener('click', submitScheduleJob)
-
+        }else if(path.includes('/technician/jobDetail')){
+          // Use event delegation to handle click events.
+          markJobDoneDom = document.getElementById('mark_job_done')
+          markJobDoneDom && markJobDoneDom.addEventListener('click', markJobDone)
+          let rowCounter = 0;
+          document.getElementById('job_part_item_area').addEventListener('click', function(event) {
+            const target = event.target
+            let element = target;
+            while (element != null && !element.classList.contains('add_part_item') && !element.classList.contains('delete_part_item')) {
+              element = element.parentElement;
+            }
+            console.log('element', element)
+            if (element && element.classList.contains('add_part_item')) {
+              event.stopPropagation();
+              rowCounter = addPartItem(rowCounter);
+            } else if (element && element.classList.contains('delete_part_item')) {
+              event.stopPropagation();
+              rowCounter = deletePartItem(element, rowCounter);
+            }
+          })
+            document.getElementById('job_service_item_area').addEventListener('click', function(event){
+            // Use event delegation to handle click events.
+            const target = event.target
+            let element = target;
+            while (element != null && !element.classList.contains('add_service_item') && !element.classList.contains('delete_service_item')) {
+                element = element.parentElement;
+            }
+            console.log('element', element)
+            if (element && element.classList.contains('add_service_item')) {
+                event.stopPropagation();
+                rowCounter = addServiceItem(rowCounter);
+            }else if (element && element.classList.contains('delete_service_item')) {
+                event.stopPropagation();
+                rowCounter = deleteServiceItem(element, rowCounter);
+            }
+          })
         }
       }
 
@@ -288,12 +341,18 @@
 
       // customer management page methods
       function addCustomerSubmit() {
+        // DATA VALIDATION
         var firstname = document.getElementById('m_firstname').value
         var familyname = document.getElementById('m_familyname').value
         var email = document.getElementById('m_email').value
         var phone = document.getElementById('m_phone').value
         var obj = {firstname,familyname,email,phone}
-        fetch('/customer/addCustomer',{
+        var email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var letter_pattern  = /^[a-zA-Z]+$/
+        var phone_pattern = /^\d+$/;
+        if(email_pattern.test(email) && letter_pattern.test(firstname) && letter_pattern.test(familyname) && phone_pattern.test(phone)){
+          // IF DATA IS VALID,Send a request to the server to add customer information
+          fetch('/manager/customer/addCustomer',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -313,6 +372,9 @@
                   alert('add customer fial,please try again')
                 }
             })
+        }else{
+          alert('please input correct information')
+        }
       }
 
       function updateCustomerDom(customerList) {
@@ -339,7 +401,7 @@
 
       async function customerSearch() {
         const search_keyword = document.getElementById('customer_search').value
-        response = await fetchRequest('/customer/searchCustomer', {search_keyword}, 'GET')
+        response = await fetchRequest('/manager/customer/searchCustomer', {search_keyword}, 'GET')
         result = await (await response).json()
         const customerList = result.data
         console.log('result', result)
@@ -357,7 +419,12 @@
         // GET DATA FROM USER INPUT
         let part_name = document.getElementById('add_part_name').value
         let part_cost = document.getElementById('add_part_cost').value
-        const response = await fetchRequest('/part/addPart', JSON.stringify({part_name, part_cost}))
+         var regex = /^\d+(\.\d+)?$/;
+         if (!regex.test(part_cost)) {
+           alert('the field of cost please input a number')
+           return
+         }
+        const response = await fetchRequest('/manager/part/addPart', JSON.stringify({part_name, part_cost}))
         const result = await (await response).json()
         const partList = result.data
         console.log('result', result)
@@ -367,7 +434,7 @@
           alert('add part success')
           updatePartDom(partList)
         }else{
-          alert('system is too busy,please try again')
+          alert(result.data)
         }
       }
       function updatePartDom(partList){
@@ -411,7 +478,12 @@
         // GET DATA FROM USER INPUT
         let service_name = document.getElementById('add_service_name').value
         let service_cost = document.getElementById('add_service_cost').value
-        const response = await fetchRequest('/service/addService', JSON.stringify({service_name, service_cost}))
+        var regex = /^\d+(\.\d+)?$/;
+         if (!regex.test(service_cost)) {
+           alert('the field of cost please input a number')
+           return
+         }
+        const response = await fetchRequest('/manager/service/addService', JSON.stringify({service_name, service_cost}))
         const result = await (await response).json()
         const serviceList = result.data
         console.log('result', result)
@@ -421,7 +493,7 @@
           alert('add service success')
           updatePartDom(serviceList)
         }else{
-          alert('system is too busy,please try again')
+          alert(result.data)
         }
       }
       function updatePartDom(partList){
@@ -473,7 +545,7 @@
           alert('please select correct username')
           return
         }
-        response = await fetchRequest('/unpaidBill/searchUnpaidBillByName', JSON.stringify({customer_id}))
+        response = await fetchRequest('/manager/unpaidBill/searchUnpaidBillByName', JSON.stringify({customer_id}))
         result = await (await response).json()
         if (result.code == 200){
           updateUnpaidBillDom(result.data)
@@ -482,10 +554,16 @@
         }
       }
 
-      function payBill(){
-        payBillBtn = document.getElementById('pay_bill_btn')
-        pay_job_id = document.getElementById('pay_job_id').text()
-        console.log('pay_job_id', pay_job_id)
+      async function payBill(customer_id,job_date){
+        response = await fetchRequest('/manager/unpaidBill/payBill', JSON.stringify({customer_id,job_date}))
+        result = await (await response).json()
+        if (result.code == 200){
+          alert(result.data)
+          // Refresh page data
+          location.reload()
+        }else{
+          alert('system is too busy,please try again')
+        }
       }
 
       // schedule job page method
@@ -493,10 +571,102 @@
         // response schedule job submit
         customer_id = document.getElementById('user_name_select').value
         schedule_date = document.getElementById('job_date_picker').value
-        response = await fetchRequest('/bill/scheduleJob', JSON.stringify({customer_id, schedule_date}))
+        response = await fetchRequest('/manager/bill/scheduleJob', JSON.stringify({customer_id, schedule_date}))
         result = await (await response).json()
         console.log('result', result)
       }
+
+      function addPartItem(rowCounter) {
+        rowCounter++
+        const jobPartItemArea = document.getElementById('job_part_item_area')
+        // Insert into DOM nodes using template strings.
+        const jobPartItemDomTemplate = ` <div class="row mt-2">
+                    <div  class="col-5">
+                        <select class="form-select col-5" name="partSelect[${rowCounter}]">
+                            <option selected value="0">Open this select part</option>
+                         {% for part in partList %}
+                            <option value="{{part[0]}}">{{part[1]}}</option>
+                         {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-5">
+                        <input class="form-control" type="text" name="partInput[${rowCounter}]" />
+                    </div>
+                    <div class="col-1 text-center align-center add_part_item" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="80%"  fill="currentColor" class="bi bi-file-plus" viewBox="0 0 16 16">
+                          <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z"/>
+                          <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
+                        </svg>
+                    </div>
+                    <div class="col-1 text-center align-items-center delete_part_item" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="80%" fill="currentColor" class="bi bi-file-minus" viewBox="0 0 16 16">
+                          <path d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
+                          <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                        </svg>
+                    </div>
+                  </div>`
+        let parser = new DOMParser();
+        let doc = parser.parseFromString(jobPartItemDomTemplate, 'text/html');
+        let newDiv = doc.body.firstChild;
+        jobPartItemArea.appendChild(newDiv)
+        return rowCounter;
+      }
+      function deletePartItem(target,rowCounter) {
+        rowCounter--;
+        let parent = target.parentElement
+        parent.innerHTML = ''
+        return rowCounter
+      }
+
+      function addServiceItem(rowCounter) {
+        rowCounter++
+        const jobServiceItemArea = document.getElementById('job_service_item_area')
+        // Insert into DOM nodes using template strings.
+        const jobServiceItemDomTemplate = `   <div class="row mt-2 job_service_item_row" >
+                    <div  class="col-5">
+                        <select class="form-select col-5" name="partSelect[0]">
+                            <option selected value="0">Open this select service</option>
+                         {% for service in serviceList %}
+                            <option value="{{service[0]}}">{{service[1]}}</option>
+                         {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-5">
+                        <input class="form-control" type="text" name="partInput[0]"/>
+                    </div>
+                    <div class="col-1 text-center align-center add_service_item" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="80%"  fill="currentColor" class="bi bi-file-plus" viewBox="0 0 16 16">
+                          <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z"/>
+                          <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
+                        </svg>
+                    </div>
+                    <div class="col-1 text-center align-items-center delete_service_item" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="80%" fill="currentColor" class="bi bi-file-minus" viewBox="0 0 16 16">
+                          <path d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
+                          <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                        </svg>
+                    </div>
+                  </div>`
+        let parser = new DOMParser();
+        let doc = parser.parseFromString(jobServiceItemDomTemplate, 'text/html');
+        let newDiv = doc.body.firstChild;
+        jobServiceItemArea.appendChild(newDiv)
+        return rowCounter;
+      }
+      function deleteServiceItem(target,rowCounter) {
+        rowCounter--;
+        let parent = target.parentElement
+        parent.innerHTML = ''
+        return rowCounter
+      }
+
+      async function markJobDone(){
+        const job_id = document.getElementById('job_id_hidden').innerText
+        response = await fetchRequest('/technician/markJobDone', {job_id}, 'GET')
+        location.reload();
+      }
+
+
 
       /* global bootstrap: false */
       (() => {

@@ -37,10 +37,10 @@
                                     <tr>
                                         <td>{{unpaid_bill[1]}}</td>
                                         <td>{{unpaid_bill[6]}}</td>
-                                        <td>{{unpaid_bill[3]}}</td>
+                                        <td>{{ unpaid_bill[3] if unpaid_bill[3] is defined and unpaid_bill[3] != none else 0.0 }}</td>
                                         <td>{{unpaid_bill[4]}}</td>
                                         <td>
-                                            <button type="button" class="btn btn-danger pay_bill_btn" data-id="{{unpaid_bill[2]}}" id="pay_bill_btn">pay now</button>
+                                            <button type="button" class="btn btn-danger pay_bill_btn" data-id="{{unpaid_bill[2]}}" data-jobDate="{{unpaid_bill[1]}}" id="pay_bill_btn">pay now</button>
                                         </td>
                                     </tr>
                                 {% endfor %}
