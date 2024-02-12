@@ -1,4 +1,4 @@
-## Web application structure
+ ## Web application structure
 
 In practical applications, the frontend's requests are sent to the backend in the form of API calls. The backend first checks if the route path of the request exists. If it does, the corresponding business function for that path is invoked to execute the relevant business logic and return the results to the frontend. The core interfaces in the system are shown in the following table.
 
